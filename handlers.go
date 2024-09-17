@@ -5,7 +5,6 @@ import (
 	"net/http"
 )
 
-
 func handleClientProfile(w http.ResponseWriter, r *http.Request){
 	// Router to another function depending on the request method
 	// Will allow get and patch requests(patch will allow the user profile to update)
@@ -21,12 +20,7 @@ func handleClientProfile(w http.ResponseWriter, r *http.Request){
 }
 
 func GetClientProfile(w http.ResponseWriter, r *http.Request){
-	var clientId = r.URL.Query().Get("clientId")
-	clientProfile, ok := database[clientId]
-	if !ok || clientId == ""{
-		http.Error(w, "Forbidden", http.StatusForbidden)
-		return
-	}
+	clientProfile := r.Context().Value("clientProfile").(ClientProfile) // the last part is casting to the correct struct type
 
 	response := ClientProfile{
 		Email:clientProfile.Email,
@@ -38,12 +32,7 @@ func GetClientProfile(w http.ResponseWriter, r *http.Request){
 }
 
 func UpdateClientProfile(w http.ResponseWriter, r *http.Request){
-	var clientId = r.URL.Query().Get("clientId")
-	clientProfile, ok := database[clientId]
-	if !ok || clientId == "" {
-		http.Error(w, "Forbidden", http.StatusForbidden)
-		return
-	}
+	clientProfile := r.Context().Value("clientProfile").(ClientProfile) 
 
 	// Decode the JSON payload directly into the struct
 	var payloadData ClientProfile 
