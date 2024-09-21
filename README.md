@@ -3,4 +3,3 @@
  This is yet another mini one-day project i made in order to get familiar with Go, ahead of a much bigger project i intend to begin soon as of writing this.
  In addition to learning more about Go and working with APIs within it, this mini project allowed me to get familiar with the program Postman.
 
-"go run main.go handlers.go database.go auth.go" in the command line to run.
